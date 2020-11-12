@@ -8,9 +8,11 @@ DF = import '../lib/digital-fabric'
 Exception.__disable_sanitized_backtrace__ = true
 
 puts '
-    \ /
-   --x--  Digital Fabric server
-    / \  
+    •   •
+     \ /
+  •---x---•   Digital Fabric server
+     / \  
+    •   •
 
 '
 
