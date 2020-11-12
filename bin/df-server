@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'modulation'
+DF = import '../lib/digital-fabric'
+
+Exception.__disable_sanitized_backtrace__ = true
+
+puts '
+    \ /
+   --x--  Digital Fabric server
+    / \  
+
+'
+
+trap("INT") { exit! }
+DF.start

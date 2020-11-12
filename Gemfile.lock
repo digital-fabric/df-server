@@ -1,0 +1,51 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ansi (1.5.0)
+    builder (3.2.4)
+    erubis (2.7.0)
+    hiredis (0.6.3)
+    http-2 (0.10.2)
+    http_parser.rb (0.6.0)
+    httparty (0.18.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2020.1104)
+    minitest (5.13.0)
+    minitest-reporters (1.4.2)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
+    modulation (1.0)
+    multi_xml (0.6.0)
+    polyphony (0.47.2)
+    rack (2.2.3)
+    redis (4.1.0)
+    ruby-progressbar (1.10.1)
+    tipi (0.32)
+      http-2 (~> 0.10.0)
+      http_parser.rb (~> 0.6.0)
+      polyphony (~> 0.45)
+      rack (>= 2.0.8, < 2.3.0)
+      websocket (~> 1.2.8)
+    websocket (1.2.8)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  erubis (= 2.7.0)
+  hiredis (= 0.6.3)
+  httparty (= 0.18.0)
+  minitest (= 5.13.0)
+  minitest-reporters (= 1.4.2)
+  modulation (= 1.0)
+  polyphony (~> 0.47.2)
+  redis (= 4.1.0)
+  tipi (~> 0.32)
+
+BUNDLED WITH
+   2.1.4
