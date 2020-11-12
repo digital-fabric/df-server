@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'modulation',     '1.0'
-gem 'polyphony',      '~>0.47.2'
+gem 'polyphony',      '~>0.47.3'
 gem 'tipi',           '~>0.32'
 gem 'redis',          '4.1.0'
 gem 'hiredis',        '0.6.3'

@@ -10,11 +10,11 @@ Exception.__disable_sanitized_backtrace__ = true
 puts '
     •   •
      \ /
-  •---x---•   Digital Fabric server
-     / \  
+  •---•---•   Digital Fabric server
+     / \
     •   •
 
 '
 
-trap("INT") { exit! }
+trap("INT") { puts; exit! }
 DF.start
