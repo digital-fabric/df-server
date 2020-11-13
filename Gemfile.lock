@@ -21,6 +21,7 @@ GEM
       ruby-progressbar
     modulation (1.0)
     multi_xml (0.6.0)
+    oj (3.10.16)
     polyphony (0.47.3)
     rack (2.2.3)
     redis (4.1.0)
@@ -43,6 +44,7 @@ DEPENDENCIES
   minitest (= 5.13.0)
   minitest-reporters (= 1.4.2)
   modulation (= 1.0)
+  oj (= 3.10.16)
   polyphony (~> 0.47.3)
   redis (= 4.1.0)
   tipi (~> 0.32)

@@ -6,6 +6,7 @@ gem 'tipi',           '~>0.32'
 gem 'redis',          '4.1.0'
 gem 'hiredis',        '0.6.3'
 gem 'erubis',         '2.7.0'
+gem 'oj',             '3.10.16'
 
 group :development, :optional => true do
   gem 'minitest',             '5.13.0'
