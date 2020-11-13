@@ -27,14 +27,14 @@ STATUS_SERVICE_UNAVAILABLE = '503 Service unavailable'
 STATUS_GATEWAY_TIMEOUT = '504 Gateway timeout'
 
 def route_agent_request(agent_name, request)
-  agent = @agents[agent_name]
-  return request.respond(nil, ':status' => STATUS_SERVICE_UNAVAILABLE) if agent.nil?
+  agent_proxy = @agents[agent_name]
+  return request.respond(nil, ':status' => STATUS_SERVICE_UNAVAILABLE) if agent_proxy.nil?
 
   payload = agent_request_payload_from_http_request(request)
   return request.respond(nil, ':status' => STATUS_METHOD_NOT_ALLOWED) if payload.nil?
 
   cancel_after(60) do
-    agent << { kind: 'request', sender: Fiber.current, payload: payload }
+    agent_proxy << { kind: 'request', sender: Fiber.current, payload: payload }
     response = receive
     payload = response[:payload]
     request.respond(payload.to_json, 'Content-Type' => MIME_JSON)
@@ -79,7 +79,7 @@ def start_proxy_fiber(agent_name, socket)
     when 'response'
       pending = pending_requests[message[:iseq]]
       if pending
-        pending[:sender] << message
+        pending[:sender] << message rescue nil
         pending_requests.delete(message[:iseq])
       end
     when 'request'
@@ -90,23 +90,27 @@ def start_proxy_fiber(agent_name, socket)
         iseq: message[:iseq],
         payload: message[:payload]
       }
+      Logger.log("[#{agent_name}] << #{socket_request.inspect}")
       socket << "#{socket_request.to_json}\n"
     end
   end
 end
 
 def incoming_socket_loop(agent_name, socket, proxy)
-  loop do
+  move_on_after(60) do |timeout|
     while (message = socket.gets)
+      timeout.reset
       message = Oj.load(message) rescue nil
       handle_incoming_socket_message(agent_name, message, proxy) if message
     end
   end
-rescue IOError
+  socket.close
+rescue SystemCallError, IOError
   # ignore
 end
 
 def handle_incoming_socket_message(agent_name, message, proxy)
+  Logger.log("[#{agent_name}] >> #{message.inspect}")
   case message[:kind]
   when 'response'
     proxy << message
